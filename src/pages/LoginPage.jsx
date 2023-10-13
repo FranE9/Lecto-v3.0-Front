@@ -1,29 +1,46 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../hook/useForm";
 import loginBackground from "../../src/assets/images/backgroundLogin.png";
 
+import axios from "axios";
+
+const AuthApi = React.createContext();
+const TokenApi = React.createContext();
+import Cookies from "js-cookie";
+
 export const LoginPage = () => {
+  const Auth = React.useContext(AuthApi);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const { name, email, password, onInputChange, onResetForm } = useForm({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const handleSubmit = async (evt) => {
+    if (evt) {
+      evt.preventDefault();
+    }
+    const form_data = new FormData()
 
-  const onLogin = (e) => {
-    e.preventDefault();
-
-    navigate("/dashboard", {
-      replace: true,
-      state: {
-        logged: true,
-        name,
-      },
-    });
-
-    onResetForm();
+    form_data.append("username", email) // proba
+    form_data.append("password", password)
+    
+    const news = async () => {
+          let res = await axios
+            .post("http://127.0.0.1:8080/auth/login", form_data)
+            .then((response) => {
+              console.log(response);
+              Cookies.set("token", response.data.access_token);
+              return response;
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+          return res;
+        };
+    let x = await news();
+    if (x) {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -32,7 +49,7 @@ export const LoginPage = () => {
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline uppercase decoration-wavy">
           Iniciar sesion
         </h1>
-        <form onSubmit={onLogin} className="mt-6">
+        <form onSubmit={handleSubmit} className="mt-6">
           <div className="mb-2">
             <label
               for="email"
@@ -41,11 +58,11 @@ export const LoginPage = () => {
               Email
             </label>
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
               value={email}
-              onChange={onInputChange}
+              onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="off"
               className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -63,7 +80,7 @@ export const LoginPage = () => {
               name="password"
               id="password"
               value={password}
-              onChange={onInputChange}
+              onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="off"
               className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -73,7 +90,7 @@ export const LoginPage = () => {
             Olvido su contraseña?
           </a>
           <div className="mt-6">
-            <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+            <button type="submit" className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
               Entrar
             </button>
           </div>
@@ -93,3 +110,4 @@ export const LoginPage = () => {
     </div>
   );
 };
+
