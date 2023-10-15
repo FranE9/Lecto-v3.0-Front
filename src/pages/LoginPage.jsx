@@ -1,113 +1,64 @@
-import React, {useState} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+// components
+import Input from "../components/auth/Input";
+import Button from "../components/auth/Button";
+import Layout from "../components/auth/Layout";
+// hooks
+import { AuthContext } from "../context/AuthContext";
 import { useForm } from "../hook/useForm";
+// assets
 import loginBackground from "../../src/assets/images/backgroundLogin.png";
-
-import axios from "axios";
-
-const AuthApi = React.createContext();
-const TokenApi = React.createContext();
-import Cookies from "js-cookie";
+// api
+import { login } from "../api/auth";
 
 export const LoginPage = () => {
-  const Auth = React.useContext(AuthApi);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const { updateUserInfo } = useContext(AuthContext);
+  const { onInputChange, onResetForm, formState } = useForm({
+    username: "",
+    password: "",
+  });
 
   const handleSubmit = async (evt) => {
-    if (evt) {
-      evt.preventDefault();
-    }
-    const form_data = new FormData()
+    evt.preventDefault();
+    const formData = new FormData();
+    formData.append("username", formState.username);
+    formData.append("password", formState.password);
 
-    form_data.append("username", email) // proba
-    form_data.append("password", password)
-    
-    const news = async () => {
-          let res = await axios
-            .post("http://127.0.0.1:8080/auth/login", form_data)
-            .then((response) => {
-              console.log(response);
-              Cookies.set("token", response.data.access_token);
-              return response;
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
-          return res;
-        };
-    let x = await news();
-    if (x) {
-      navigate("/dashboard");
+    const { isOk, data, message } = await login(formData);
+    if (!isOk) {
+      onResetForm();
+      alert(message);
+      return;
     }
+    updateUserInfo(data.access_token);
   };
 
   return (
-    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden" style={{ backgroundImage: `url(${loginBackground})` }}>
-      <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl shadow-rose-600/40 ring ring-2 ring-purple-600 lg:max-w-xl">
-        <h1 className="text-3xl font-semibold text-center text-purple-700 underline uppercase decoration-wavy">
-          Iniciar sesion
-        </h1>
-        <form onSubmit={handleSubmit} className="mt-6">
-          <div className="mb-2">
-            <label
-              for="email"
-              className="block text-sm font-semibold text-gray-800"
-            >
-              Email
-            </label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoComplete="off"
-              className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            />
-          </div>
-          <div className="mb-2">
-            <label
-              for="password"
-              className="block text-sm font-semibold text-gray-800"
-            >
-              Contraseña
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoComplete="off"
-              className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            />
-          </div>
-          <a href="#" className="text-xs text-purple-600 hover:underline">
-            Olvido su contraseña?
-          </a>
-          <div className="mt-6">
-            <button type="submit" className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
-              Entrar
-            </button>
-          </div>
-        </form>
-
-        <p className="mt-8 text-xs font-light text-center text-gray-700">
-          {" "}
-          ¿No tienes una cuenta?{" "}
-          <Link
-            to="/register"
-            className="font-medium text-purple-600 hover:underline"
-          >
-            Registrarse
-          </Link>
-        </p>
-      </div>
-    </div>
+    <Layout
+      loginBackground={loginBackground}
+      title="Iniciar sesión"
+      handleSubmit={handleSubmit}
+      footerLabel="¿No tienes una cuenta?"
+      footerLinkLabel="Registrarse"
+      footerHref="/register"
+    >
+      <Input
+        name={"username"}
+        value={formState.username}
+        onChange={onInputChange}
+        label={"Usuario"}
+      />
+      <Input
+        name={"password"}
+        value={formState.password}
+        onChange={onInputChange}
+        label={"Contraseña"}
+        type="password"
+      />
+      <a href="#" className="text-xs text-purple-600 hover:underline">
+        Olvido su contraseña?
+      </a>
+      <Button label="Entrar" />
+    </Layout>
   );
 };
-

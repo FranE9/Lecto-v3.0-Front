@@ -1,45 +1,46 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const HomePage = () => {
   return (
     <>
-      <section class="bg-indigo-500">
-        <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-          <div class="mr-auto place-self-center lg:col-span-7">
-            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+      <section className="bg-indigo-500">
+        <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+          <div className="mr-auto place-self-center lg:col-span-7">
+            <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             </h1>
-            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-white">
+            <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-white">
               Deleniti, earum consectetur illo sit repudiandae eos ab quas
               distinctio, optio dolorum mollitia unde culpa laboriosam est
               impedit error perspiciatis excepturi praesentium?
             </p>
-            <a
-              href="#"
-              class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+            <Link
+              to={"/login"}
+              className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
               Inicia sesion
               <svg
-                class="w-5 h-5 ml-2 -mr-1"
+                className="w-5 h-5 ml-2 -mr-1"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
-            </a>
-            <a
-              href="#"
-              class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+            </Link>
+            <Link
+              to={"/register"}
+              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               Registrate
-            </a>
+            </Link>
           </div>
-          <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+          <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img
               src="https://assets.website-files.com/6364b6fd26e298b11fb9391f/6364b6fd26e298b303b93d91_3d-tb-education.png"
               alt="mockup"
@@ -48,21 +49,21 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <div class="sm:flex items-center bg-orange-200">
-        <div class="sm:w-1/2 p-10">
-          <div class="image object-center text-center">
+      <div className="sm:flex items-center bg-orange-200">
+        <div className="sm:w-1/2 p-10">
+          <div className="image object-center text-center">
             <img src="https://i.imgur.com/WbQnbas.png" />
           </div>
         </div>
-        <div class="sm:w-1/2 p-5">
-          <div class="text">
-            <span class="text-gray-500 border-b-2 border-indigo-600 uppercase">
+        <div className="sm:w-1/2 p-5">
+          <div className="text">
+            <span className="text-gray-500 border-b-2 border-indigo-600 uppercase">
               About us
             </span>
-            <h2 class="my-4 font-bold text-3xl  sm:text-4xl ">
-              About <span class="text-indigo-600">Our Company</span>
+            <h2 className="my-4 font-bold text-3xl  sm:text-4xl ">
+              About <span className="text-indigo-600">Our Company</span>
             </h2>
-            <p class="text-gray-700">
+            <p className="text-gray-700">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid,
               commodi doloremque, fugiat illum magni minus nisi nulla numquam
               obcaecati placeat quia, repellat tempore voluptatum.
@@ -243,8 +244,6 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-
-      
     </>
   );
 };

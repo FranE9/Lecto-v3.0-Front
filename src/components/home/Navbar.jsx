@@ -1,64 +1,56 @@
-import React from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import lecto from "../src/assets/images/iconLecto.png";
+import React, { useContext } from "react";
+import { Link, Outlet } from "react-router-dom";
+import lecto from "../../assets/images/iconLecto.png";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Navbar = () => {
-  const { state } = useLocation();
-  const navigate = useNavigate();
-
-  console.log(state);
-
-  const onLogout = () => {
-    navigate("/login", {
-      replace: true,
-    });
-  };
+  const { user, updateUserInfo } = useContext(AuthContext);
 
   return (
     <>
       <header>
-        {state?.logged ? (
-          <div class="bg-white shadow">
-            <div class="container mx-auto px-4">
-              <div class="flex items-center justify-between py-4">
+        {user.isLogged ? (
+          <div className="bg-white shadow">
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between py-4">
                 <div>
                   <img src={lecto} />
                 </div>
 
-                <div class="hidden sm:flex sm:items-center">
+                <div className="hidden sm:flex sm:items-center">
                   <a
                     href="#"
-                    class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
+                    className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
                   >
                     Dash1
                   </a>
                   <a
                     href="#"
-                    class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
+                    className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
                   >
                     Dash2
                   </a>
                   <a
                     href="#"
-                    class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
+                    className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
                   >
                     Dash3
                   </a>
                 </div>
 
-                <div class="hidden sm:flex sm:items-center">
-                  <a
-                    href="#"
-                    class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600"
+                <div className="hidden sm:flex sm:items-center">
+                  <button
+                    className="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600"
+                    onClick={() => updateUserInfo()}
                   >
                     Cerrar Sesion
-                  </a>
+                  </button>
                 </div>
 
-                <div class="sm:hidden cursor-pointer">
+                <div className="sm:hidden cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-6 h-6 text-purple-600"
+                    className="w-6 h-6 text-purple-600"
                     viewBox="0 0 24 24"
                   >
                     <path
@@ -72,22 +64,22 @@ export const Navbar = () => {
           </div>
         ) : (
           <nav>
-            <div class="bg-white shadow">
-              <div class="container mx-auto px-4">
-                <div class="flex items-center justify-between py-4">
+            <div className="bg-white shadow">
+              <div className="container mx-auto px-4">
+                <div className="flex items-center justify-between py-4">
                   <div>
                     <Link to="/">
                       <img src={lecto} />
                     </Link>
                   </div>
 
-                  <div class="hidden sm:flex sm:items-center"></div>
+                  <div className="hidden sm:flex sm:items-center"></div>
 
-                  <div class="hidden sm:flex sm:items-center">
+                  <div className="hidden sm:flex sm:items-center">
                     <Link to="/login">
                       <a
                         href="#"
-                        class="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
+                        className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
                       >
                         Iniciar Sesion
                       </a>
@@ -95,17 +87,17 @@ export const Navbar = () => {
                     <Link to="/register">
                       <a
                         href="#"
-                        class="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600"
+                        className="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600"
                       >
                         Registrarse
                       </a>
                     </Link>
                   </div>
 
-                  <div class="sm:hidden cursor-pointer">
+                  <div className="sm:hidden cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-6 h-6 text-purple-600"
+                      className="w-6 h-6 text-purple-600"
                       viewBox="0 0 24 24"
                     >
                       <path
