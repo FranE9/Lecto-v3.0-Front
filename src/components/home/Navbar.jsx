@@ -18,23 +18,23 @@ export const Navbar = () => {
                 </div>
 
                 <div className="hidden sm:flex sm:items-center">
+                  <Link
+                    to="/dashboard"
+                    className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
+                  >
+                    PDF
+                  </Link>
+                  <Link
+                    to="/dashboard2"
+                    className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
+                  >
+                    Texto
+                  </Link>
                   <a
                     href="#"
                     className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
                   >
-                    Dash1
-                  </a>
-                  <a
-                    href="#"
-                    className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
-                  >
-                    Dash2
-                  </a>
-                  <a
-                    href="#"
-                    className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
-                  >
-                    Dash3
+                    Consultar ticket
                   </a>
                 </div>
 
