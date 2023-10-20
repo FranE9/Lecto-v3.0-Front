@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 // components
 import Input from "../components/auth/Input";
 import Button from "../components/auth/Button";
@@ -46,7 +47,7 @@ export const LoginPage = () => {
         name={"username"}
         value={formState.username}
         onChange={onInputChange}
-        label={"Usuario"}
+        label={"Usuario "}
       />
       <Input
         name={"password"}
@@ -59,6 +60,7 @@ export const LoginPage = () => {
         Olvido su contraseña?
       </a>
       <Button label="Entrar" />
+      <div></div>
     </Layout>
   );
 };

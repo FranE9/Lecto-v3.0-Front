@@ -8,7 +8,7 @@ export const HomePage = () => {
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div className="mr-auto place-self-center lg:col-span-7">
             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            ¡Bienvenido a Lecto!
             </h1>
             <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-white">
               Deleniti, earum consectetur illo sit repudiandae eos ab quas
@@ -58,10 +58,10 @@ export const HomePage = () => {
         <div className="sm:w-1/2 p-5">
           <div className="text">
             <span className="text-gray-500 border-b-2 border-indigo-600 uppercase">
-              About us
+              Sobre nosotros
             </span>
             <h2 className="my-4 font-bold text-3xl  sm:text-4xl ">
-              About <span className="text-indigo-600">Our Company</span>
+            ¿Quienes <span className="text-indigo-600">somos?</span>
             </h2>
             <p className="text-gray-700">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid,
@@ -76,7 +76,7 @@ export const HomePage = () => {
         <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
           <div>
             <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-              Brand new
+              Herramientas
             </p>
           </div>
           <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">

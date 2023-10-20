@@ -1,10 +1,13 @@
 import React, { createContext, useState } from "react";
+import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext();
 
 const initialState = {
   isLogged: false,
   token: "",
+  username: '',
+  userId: '',
 };
 
 export const AuthProvider = ({ children }) => {
@@ -19,9 +22,13 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
+    const decoded = jwt_decode(token);
+
     const newUserInfo = {
       isLogged: Boolean(token),
       token,
+      username: decoded?.username || "",
+      userId: decoded?.user_id || ""
     };
     localStorage.setItem("lecto-user", JSON.stringify(newUserInfo));
     setUser(newUserInfo);
