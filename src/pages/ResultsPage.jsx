@@ -1,9 +1,14 @@
 import React from "react";
 import spaTitle from "../assets/images/Titulo_spa.jpg";
-import pazosImg from "../assets/images/Pazos.jpg";
-import infleszImg from "../assets/images/INFLESZ.jpg";
-import fernandezHuertaImg from "../assets/images/Fernandez_huerta.jpg";
-import readabilityImg from "../assets/images/Legibilidad_mu.jpg";
+
+import "../css/sandbox.css";
+import "../css/embla.css";
+
+import EmblaCarousel from "./EmblaCarousel";
+
+const OPTIONS = { loop: true };
+const SLIDE_COUNT = 4;
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 export const ResultsPage = () => {
   return (
@@ -58,40 +63,18 @@ export const ResultsPage = () => {
         </div>
       </div>
 
-      <div>
-        <img
-          src={spaTitle}
-          style={{ maxHeight: 175 }}
-          className="rounded mx-auto d-block"
-          alt="Escala en español"
-        />
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <img src={pazosImg} className="img-fluid" alt="Szigriszt-Pazos" />
-            </div>
-            <div className="col">
-              <img src={infleszImg} className="img-fluid" alt="INFLESZ" />
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <img
-                src={fernandezHuertaImg}
-                className="img-fluid"
-                alt="Fernandez Huerta"
-              />
-            </div>
-            <div className="col">
-              <img
-                src={readabilityImg}
-                className="img-fluid"
-                alt="Legibilidad Mu"
-              />
-            </div>
-          </div>
+      <div className="container mx-auto px-12 rounded-lg shadow-xl py-6">
+        <div className="card mb-3">
+          <img
+            src={spaTitle}
+            style={{ maxHeight: 175 }}
+            className="rounded mx-auto d-block"
+            alt="Escala en español"
+          />
+
+          <section className="sandbox__carousel">
+            <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+          </section>
         </div>
       </div>
       <footer className="footer mt-auto py-3">
