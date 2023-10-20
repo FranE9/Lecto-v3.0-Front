@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "../hook/useForm";
 import { sendText } from "../api/lecto";
+import { AuthContext } from "../context/AuthContext";
+import { formatTextData, saveTicket } from "../utils/formatData";
 
 export const DashboardPage2 = () => {
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const { formState, onInputChange, onResetForm } = useForm({
     texto: "",
     idioma: "spa",
@@ -14,14 +19,15 @@ export const DashboardPage2 = () => {
     formData.append("Texto", formState.texto);
     formData.append("Idioma", formState.idioma);
 
-    const { isOk, data, message } = await sendText(formData);
+    const { isOk, data, message } = await sendText(formData, user.token);
     if (!isOk) {
       onResetForm();
       alert(message);
       return;
     }
-
-    console.log(data);
+    const newTicket = formatTextData(data, formState.idioma);
+    saveTicket(newTicket);
+    navigate(`/results/${data?.id}`);
   };
 
   return (

@@ -9,7 +9,7 @@ export const AppRouter = ({ initialRoute = "/dashboard" }) => {
       <Route path="/" element={<Navbar />}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/dashboard2" element={<DashboardPage2 />} />
-        <Route path="/results" element={<ResultsPage />} />
+        <Route path="/results/:ticketId" element={<ResultsPage />} />
         <Route path="/tickets" element={<TicketsPage />} />
         <Route path="*" element={<Navigate to={initialRoute} />} />
       </Route>

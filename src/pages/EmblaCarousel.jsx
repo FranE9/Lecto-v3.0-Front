@@ -9,7 +9,7 @@ const numberWithinRange = (number, min, max) =>
   Math.min(Math.max(number, min), max)
 
 const EmblaCarousel = (props) => {
-  const { slides, options } = props
+  const { slides, options, language = "spa" } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [tweenValues, setTweenValues] = useState([])
 
@@ -65,7 +65,7 @@ const EmblaCarousel = (props) => {
               </div>
               <img
                 className="embla__slide__img"
-                src={imageByIndex(index)}
+                src={imageByIndex(index, language)}
                 alt="Your alt text"
               />
             </div>

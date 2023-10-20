@@ -1,27 +1,31 @@
-import React from "react";
-import { useForm } from "../hook/useForm";
-import { sendText } from "../api/lecto";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { getTicketById } from "../api/ticket";
+import { AuthContext } from "../context/AuthContext";
+import { formatTicketData, saveTicket } from "../utils/formatData";
 
 export const TicketsPage = () => {
-  const { formState, onInputChange, onResetForm } = useForm({
-    texto: "",
-    idioma: "spa",
-  });
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const [ticketId, setTicketId] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("Texto", formState.texto);
-    formData.append("Idioma", formState.idioma);
+    if(!ticketId) {
+      alert("Ingresa un id para buscar")
+      return;
+    }
 
-    const { isOk, data, message } = await sendText(formData);
+    const { isOk, data, message } = await getTicketById(ticketId, user.token);
     if (!isOk) {
       onResetForm();
       alert(message);
       return;
     }
+    const newTicket = formatTicketData(data?.data);
+    saveTicket(newTicket);
 
-    console.log(data);
+    navigate(`/results/${newTicket.id}`);
   };
 
   return (
@@ -32,20 +36,19 @@ export const TicketsPage = () => {
         </div>
         <form className="p-6" onSubmit={handleSubmit}>
           <label
-            htmlFor="texto"
+            htmlFor="ticketId"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
             Ticket
           </label>
           <input
-            id="texto"
-            name="texto"
-            rows="8"
+            id="ticketId"
+            name="ticketId"
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Ingresa un ticket"
-            onChange={onInputChange}
-            value={formState.texto}
-          ></input>
+            onChange={(e) => setTicketId(e.target.value)}
+            value={ticketId}
+          />
           <div className="py-6">
             <button
               type="submit"

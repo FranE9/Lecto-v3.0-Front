@@ -1,15 +1,45 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "../hook/useForm";
 import { sendFile } from "../api/lecto";
+import { AuthContext } from "../context/AuthContext";
+import { deleteTicketById, getTicketsByUser } from "../api/ticket";
+import TicketRow from "../components/home/TicketRow";
+import { formatTicketData, saveTicket } from "../utils/formatData";
 
 export const DashboardPage = () => {
-
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const [tickets, setTickets] = useState([]);
   const { formState, onInputChange, onResetForm, onFileChange } = useForm({
     archivo_pdf: '',
     inicio: '',
     final: '',
     idioma: 'spa',
   });
+
+  useEffect(() => {
+    fetchTickets();
+  }, [])
+
+  const fetchTickets = async () => {
+    const { isOk, data, message } = await getTicketsByUser(user.userId, user.token);
+    if(!isOk){
+      alert(message);
+      return;
+    }
+    setTickets(data?.data || []);
+  }
+  
+  const handleDelete = async (ticketId) => {
+    const { isOk, message } = await deleteTicketById(ticketId, user.token);
+    if(!isOk){
+      alert(message);
+      return;
+    }
+    alert(message);
+    fetchTickets();
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,15 +48,18 @@ export const DashboardPage = () => {
     formData.append("inicio", parseInt(formState.inicio));
     formData.append("final", parseInt(formState.final));
     formData.append("idioma", formState.idioma);
+    formData.append("user_id", user.userId);
 
-    const { isOk, data, message } = await sendFile(formData);
+    const { isOk, data, message } = await sendFile(formData, user.token);
     if (!isOk) {
       onResetForm();
       alert(message);
       return;
     }
+    const newTicket = formatTicketData(data?.data);
+    saveTicket(newTicket);
 
-    console.log(data);
+    navigate(`/results/${newTicket.id}`);
   };
   return (
     <>
@@ -106,6 +139,7 @@ export const DashboardPage = () => {
             <button type="submit" className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
               Enviar
             </button>
+            
           </div>
 
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -131,12 +165,14 @@ export const DashboardPage = () => {
                     Idioma
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Resultados
+                    Acciones
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white border-b"></tr>
+                {
+                  tickets.map(ticket => (<TicketRow row={ticket} key={ticket._id} onDelete={handleDelete} />))
+                }
               </tbody>
             </table>
           </div>

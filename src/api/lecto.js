@@ -1,14 +1,18 @@
 import instance from ".";
 
-export async function sendText(body) {
+export async function sendText(body, token) {
   try {
-    const { data } = await instance.post("/lecto/text", body);
+    const { data } = await instance.post("/lecto/text", body, {
+      headers: {
+        "authorization": `Bearer ${token}`
+      }
+    });
     return {
       isOk: true,
       data,
       message: "",
     };
-  } catch (error) {
+  } catch (error) {token
     console.log(error.response.data);
     return {
       isOk: false,
@@ -18,9 +22,13 @@ export async function sendText(body) {
   }
 }
 
-export async function sendFile(body) {
+export async function sendFile(body, token) {
     try {
-        const { data } = await instance.post("/lecto/pdf", body);
+        const { data } = await instance.post("/lecto/pdf", body, {
+          headers: {
+            "authorization": `Bearer ${token}`
+          }
+        });
         return {
           isOk: true,
           data,
