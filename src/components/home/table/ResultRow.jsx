@@ -1,11 +1,13 @@
 import React from "react";
 import Cell from "./Cell";
 
-const ResultRow = ({ label, value, index }) => {
+const ResultRow = ({ data = [], index }) => {
+  //  const { label, value, customClass } = data;
   return (
     <tr className={`${index % 2 == 0 ? "bg-white" : "bg-gray-50"} border-b `}>
-      <Cell customClassName="font-medium">{label}</Cell>
-      <Cell>{value}</Cell>
+      {data.map(({ value, customClass = "" }, index) => (
+        <Cell key={index} customClassName={customClass}>{value}</Cell>
+      ))}
     </tr>
   );
 };

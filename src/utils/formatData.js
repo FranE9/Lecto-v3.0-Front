@@ -6,6 +6,9 @@ export const formatTicketData = (data) => {
         column2: data?.spaResults?.szigriszt_pazos || data?.engResults?.flesch_reading_easy,
         column3: data?.spaResults?.fernandez_huerta || data?.engResults?.fog_reading,
         column4: data?.spaResults?.readability || data?.engResults?.smog_reading,
+        phrase: data?.spaResults?.phrases || data?.engResults?.phrases,
+        word: data?.spaResults?.words || data?.engResults?.words,
+        syllable: data?.spaResults?.syllables || data?.engResults?.syllables,
         language: data?.language
     };
 
@@ -19,6 +22,9 @@ export const formatTextData = (data, language) => {
         column2: language === "spa" ? data?.szigrisztPazos_INFLESZ : data?.fleshReadingEasy,
         column3: language === "spa" ? data?.fernandezHuerta : data?.fogReading,
         column4: language === "spa" ? data?.legibilidadMu : data?.smogReading,
+        phrase: data?.phrases,
+        word: data?.words,
+        syllable: data?.syllables,
         language,
     };
 
