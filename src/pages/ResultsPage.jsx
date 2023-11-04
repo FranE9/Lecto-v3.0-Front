@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import Modal from "react-modal";
 import "../css/sandbox.css";
 import "../css/embla.css";
 // components
-import ResultCarousel from "../components/home/ResultCarousel";
 import Title from "../components/home/Title";
 import Layout from "../components/home/Layout";
 import ResultTable from "../components/home/table/ResultTable";
+import ResultCarousel from "../components/home/ResultCarousel";
+import Button from "../components/home/Button";
 // hooks
 import { AuthContext } from "../context/AuthContext";
 // api
@@ -22,6 +24,7 @@ export const ResultsPage = () => {
   const { ticketId } = useParams();
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,22 +47,39 @@ export const ResultsPage = () => {
     };
 
     if (ticketId) fetchData();
+    Modal.setAppElement("#root");
   }, []);
 
   return (
-    <>
-      <Layout shadow={false}>
-        <div className="card mb-3">
-          <Title text="Resultados" textClass="mt-5" />
-          {data ? (
-            <ResultTable data={data} />
-          ) : (
-            <h1>No se encontró un ticket con el id {ticketId}</h1>
-          )}
-        </div>
-      </Layout>
-
-      {data && <ResultCarousel language={data?.language || "spa"} />}
-    </>
+    <Layout shadow={false}>
+      <div className="card mb-3">
+        <Title text="Resultados" textClass="mt-5" />
+        {data ? (
+          <ResultTable data={data} />
+        ) : (
+          <h1>No se encontró un ticket con el id {ticketId}</h1>
+        )}
+      </div>
+      <div className="flex flex-row-reverse">
+        <Button
+          text="Ver más"
+          type="button"
+          onClick={() => setShowModal(true)}
+        />
+      </div>
+      {data && (
+        <Modal isOpen={showModal} onRequestClose={() => setShowModal(false)}>
+          <div className="flex flex-row-reverse">
+            <Button
+              text="X"
+              type="button"
+              onClick={() => setShowModal(false)}
+              containerClassName="px-6"
+            />
+          </div>
+          <ResultCarousel language={data?.language || "spa"} />
+        </Modal>
+      )}
+    </Layout>
   );
 };

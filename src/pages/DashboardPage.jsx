@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { PDFDocument } from "pdf-lib";
 // components
 import Button from "../components/home/Button";
 import Select from "../components/home/input/Select";
@@ -15,22 +16,49 @@ import { sendFile } from "../api/lecto";
 import { deleteTicketById, getTicketsByUser } from "../api/ticket";
 // utils
 import { formatTicketData, saveTicket } from "../utils/formatData";
+import { getBase64 } from "../utils/functions";
 
 export const DashboardPage = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { formState, onInputChange, onResetForm, onFileChange } = useForm({
-    archivo_pdf: "",
-    inicio: "",
-    final: "",
-    idioma: "spa",
-  });
+  const { formState, onInputChange, onResetForm, onFileChange, onUpdateState } =
+    useForm({
+      archivo_pdf: "",
+      inicio: "",
+      final: "",
+      idioma: "spa",
+    });
 
   useEffect(() => {
     fetchTickets();
   }, []);
+
+  useEffect(() => {
+    if (formState.archivo_pdf !== "") {
+      onFileLoad();
+      // console.log(formState.archivo_pdf)
+    }
+  }, [formState.archivo_pdf]);
+
+  const onFileLoad = async () => {
+    try {
+      const base64File = await getBase64(formState.archivo_pdf);
+      const pdfDoc = await PDFDocument.load(base64File);
+      const pages = pdfDoc.getPages();
+      onUpdateState({
+        inicio: "1",
+        final: pages.length.toString(),
+      });
+    } catch (error) {
+      console.log("Error loading PDF document: ", error);
+      onUpdateState({
+        inicio: "",
+        final: "",
+      });
+    }
+  };
 
   const fetchTickets = async () => {
     const { isOk, data, message } = await getTicketsByUser(
@@ -79,6 +107,7 @@ export const DashboardPage = () => {
 
   return (
     <Form title="Apartado para colocar PDF" onSubmit={handleSubmit}>
+      <div></div>
       <InputFile
         labelText="PDF:"
         name="archivo_pdf"

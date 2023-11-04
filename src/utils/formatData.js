@@ -1,30 +1,27 @@
 
 export const formatTicketData = (data) => {
+    const { spaResults, engResults, _id, ...ticket } = data || {};
+
     const newTicket = {
-        id: data?._id,
-        paragraph: data?.spaResults?.paragraph || data?.engResults?.paragraph,
-        column2: data?.spaResults?.szigriszt_pazos || data?.engResults?.flesch_reading_easy,
-        column3: data?.spaResults?.fernandez_huerta || data?.engResults?.fog_reading,
-        column4: data?.spaResults?.readability || data?.engResults?.smog_reading,
-        phrase: data?.spaResults?.phrases || data?.engResults?.phrases,
-        word: data?.spaResults?.words || data?.engResults?.words,
-        syllable: data?.spaResults?.syllables || data?.engResults?.syllables,
-        language: data?.language
+        ...ticket,
+        id: _id,
+        column2: spaResults?.szigriszt_pazos || engResults?.flesch_reading_easy,
+        column3: spaResults?.fernandez_huerta || engResults?.fog_reading,
+        column4: spaResults?.readability || engResults?.smog_reading,
     };
 
     return newTicket;
 }
 
 export const formatTextData = (data, language) => {
+    const { Parrafo, ...ticket } = data || {};
+    const isSpa = language === 'spa';
     const newTicket = {
-        id: data?.id,
-        paragraph: data?.Parrafo,
-        column2: language === "spa" ? data?.szigrisztPazos_INFLESZ : data?.fleshReadingEasy,
-        column3: language === "spa" ? data?.fernandezHuerta : data?.fogReading,
-        column4: language === "spa" ? data?.legibilidadMu : data?.smogReading,
-        phrase: data?.phrases,
-        word: data?.words,
-        syllable: data?.syllables,
+        ...ticket,
+        paragraphs: Parrafo,
+        column2: isSpa ? data?.szigrisztPazos_INFLESZ : data?.fleshReadingEasy,
+        column3: isSpa ? data?.fernandezHuerta : data?.fogReading,
+        column4: isSpa ? data?.legibilidadMu : data?.smogReading,
         language,
     };
 

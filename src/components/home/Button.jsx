@@ -6,13 +6,15 @@ const Button = ({
   text,
   onClick = () => {},
   loading = false,
+  customClassName = "",
+  containerClassName = "py-6"
 }) => {
   return (
-    <div className="py-6">
+    <div className={containerClassName}>
       <button
         type={type}
         disabled={loading}
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex items-center"
+        className={`bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex items-center ${customClassName}`}
         {...(type == "submit" ? {} : { onClick })}
       >
         {loading ? (

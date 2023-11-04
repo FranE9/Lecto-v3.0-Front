@@ -17,11 +17,19 @@ export const useForm = (initialForm = {}) => {
 
   const onFileChange = ({ target }) => {
     const { name, files } = target;
+    console.log(files)
     setFormState({
       ...formState,
       [name]: files[0]
     })
   };
+
+  const onUpdateState = (newState) => {
+    setFormState({
+      ...formState,
+      ...newState
+    })
+  }
 
   return {
     ...formState,
@@ -29,5 +37,6 @@ export const useForm = (initialForm = {}) => {
     onInputChange,
     onFileChange,
     onResetForm,
+    onUpdateState,
   };
 };
