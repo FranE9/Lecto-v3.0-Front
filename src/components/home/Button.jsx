@@ -1,5 +1,6 @@
 import React from "react";
 import Spinner from "../commons/Spinner";
+import { DEFAULT_STYLE_BTN } from "../../utils/constants";
 
 const Button = ({
   type = "submit",
@@ -14,7 +15,7 @@ const Button = ({
       <button
         type={type}
         disabled={loading}
-        className={`bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex items-center ${customClassName}`}
+        className={`${DEFAULT_STYLE_BTN} ${customClassName}`}
         {...(type == "submit" ? {} : { onClick })}
       >
         {loading ? (
