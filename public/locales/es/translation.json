@@ -1,0 +1,92 @@
+{
+    "home": {
+        "welcome": "¡Bienvenido a Lecto!",
+        "login": "Inicia sesión",
+        "register": "Registrate",
+        "about": "Sobre nosotros",
+        "who": "¿Quienes",
+        "are_we": "somos?",
+        "tools": "Herramientas"
+    },
+    "login": {
+        "title": "Iniciar sesión",
+        "user": "Usuario",
+        "password": "Contraseña",
+        "forgot_password": "Olvidó su contraseña?",
+        "no_account": "¿No tienes una cuenta?",
+        "register": "Registrarse",
+        "submit": "Entrar"
+    },
+    "register": {
+        "title": "Registrarse",
+        "have_account": "¿Ya posee una cuenta?",
+        "login": "Entrar",
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "user": "Usuario",
+        "password": "Contraseña",
+        "submit": "Registrar"
+    },
+    "navbar": {
+        "pdf": "PDF",
+        "text": "Texto",
+        "ticket": "Consultar ticket",
+        "logout": "Cerrar sesión"
+    },
+    "dashboard": {
+        "title": "Apartado para colocar PDF",
+        "file_label": "PDF:",
+        "validation": "Solo archivos .pdf",
+        "from": "Inicio:",
+        "to": "Fin:",
+        "send": "Enviar"
+    },
+    "dashboard_table": {
+        "ticket": "Ticket",
+        "estimated_time": "Tiempo estimado",
+        "date": "Fecha",
+        "time": "Hora",
+        "file": "Archivo",
+        "language": "Idioma",
+        "actions": "Acciones",
+        "view": "Ver",
+        "delete": "Eliminar"
+    },
+    "text": {
+        "title": "Apartado para colocar texto",
+        "label": "Pega el texto aquí",
+        "placeholder": "Ingresa el texto",
+        "send": "Enviar"
+    },
+    "search": {
+        "alert": "Ingresa un id para buscar",
+        "title": "Consultar ticket",
+        "label": "Ticket",
+        "placeholder": "Ingresa un ticket",
+        "submit": "Consultar"
+    },
+    "results": {
+        "title": "Resultados",
+        "download": "Descargar CSV",
+        "show": "Ver más",
+        "not_found": "No se encontró el ticket con el id"
+    },
+    "result_table": {
+        "phrase": "Frases",
+        "words": "Palabras",
+        "syllables": "Sílabas",
+        "paragraphs": "Parrafos",
+        "measure": "Medida",
+        "score": "Puntuación",
+        "difficulty": "Dificultad",
+        "content": "Contenido"
+    },
+    "chart": {
+        "yLabel": "Perspicuidad",
+        "xLabel": "Número de parráfo"
+    },
+    "languages": {
+        "spa": "Espanol",
+        "eng": "Inglés"
+    }
+}

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PDFDocument } from "pdf-lib";
+import { useTranslation } from 'react-i18next';
 // components
 import Button from "../components/home/Button";
-import Select from "../components/home/input/Select";
 import Input from "../components/home/input/Input";
 import InputFile from "../components/home/input/InputFile";
 import Form from "../components/home/Form";
@@ -29,6 +29,9 @@ export const DashboardPage = () => {
       inicio: "",
       final: "",
     });
+
+  const { t } = useTranslation();
+
 
   useEffect(() => {
     fetchTickets();
@@ -104,19 +107,19 @@ export const DashboardPage = () => {
   };
 
   return (
-    <Form title="Apartado para colocar PDF" onSubmit={handleSubmit}>
+    <Form title={t('dashboard.title')} onSubmit={handleSubmit}>
       <div></div>
       <InputFile
-        labelText="PDF:"
+        labelText={t('dashboard.file_label')}
         name="archivo_pdf"
         accept=".pdf"
         type="file"
         onChange={onFileChange}
       />
-      <p className="mb-4 text-base text-neutral-600 ">Solo archivos .pdf</p>
+      <p className="mb-4 text-base text-neutral-600 ">{t('dashboard.validation')}</p>
       <div className="grid gap-6 mb-6 md:grid-cols-2">
         <Input
-          labelText="Inicio:"
+          labelText={t('dashboard.from')}
           type="number"
           name="inicio"
           placeholder="1"
@@ -125,7 +128,7 @@ export const DashboardPage = () => {
           onChange={onInputChange}
         />
         <Input
-          labelText="Fin:"
+          labelText={t('dashboard.to')}
           type="number"
           name="final"
           placeholder="5"
@@ -134,7 +137,7 @@ export const DashboardPage = () => {
           onChange={onInputChange}
         />
       </div>
-      <Button text="Enviar" loading={loading} />
+      <Button text={t('dashboard.send')} loading={loading} />
       <TicketTable handleDelete={handleDelete} tickets={tickets} />
     </Form>
   );

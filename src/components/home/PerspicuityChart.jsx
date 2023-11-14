@@ -1,9 +1,11 @@
 import React, { useMemo } from "react";
 import { Chart } from "react-charts";
+import { useTranslation } from 'react-i18next';
 import { formatChartData } from "../../utils/formatData";
 
 const PerspicuityChart = ({ chartData = [], lang = "es" }) => {
   const data = formatChartData(chartData, lang);
+  const { t } = useTranslation();
 
   const primaryAxis = useMemo(
     () => ({
@@ -28,7 +30,7 @@ const PerspicuityChart = ({ chartData = [], lang = "es" }) => {
           transformOrigin: "0 0",
           bottom: 90
         }}>
-          Perspicuidad
+          {t('chart.yLabel')}
         </p>
         <div
           style={{
@@ -45,7 +47,7 @@ const PerspicuityChart = ({ chartData = [], lang = "es" }) => {
         </div>
       </aside>
       <p className="text-black text-1rem letter-spacing-[1px] text-center">
-        Número de parráfo
+        {t('chart.xLabel')}
       </p>
     </>
   );

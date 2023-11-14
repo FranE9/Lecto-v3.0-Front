@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 // components
 import Button from "../components/home/Button";
-import Select from "../components/home/input/Select";
 import TextArea from "../components/home/input/TextArea";
 import Form from "../components/home/Form";
 // hooks
@@ -20,6 +20,8 @@ export const TextPage = () => {
   const { formState, onInputChange, onResetForm } = useForm({
     texto: "",
   });
+
+  const { t } = useTranslation();
 
   const handleSubmit = async (event) => {
     setLoading(true);
@@ -40,16 +42,16 @@ export const TextPage = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} title="Apartado para colocar texto">
+    <Form onSubmit={handleSubmit} title={t('text.title')}>
       <TextArea
-        labelText="Pega el texto aquí"
+        labelText={t('text.label')}
         name="texto"
         onChange={onInputChange}
         value={formState.texto}
         rows="8"
-        placeholder="Ingresa el texto"
+        placeholder={t('text.placeholder')}
       />
-      <Button text="Enviar" loading={loading} />
+      <Button text={t('text.send')} loading={loading} />
     </Form>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "react-modal";
 import { CSVLink } from "react-csv";
+import { useTranslation } from 'react-i18next';
 import "../css/sandbox.css";
 import "../css/embla.css";
 // components
@@ -34,6 +35,8 @@ export const ResultsPage = () => {
   const [data, setData] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     const fetchData = async () => {
       const foundTicket = getCurrentTicket(ticketId);
@@ -61,7 +64,7 @@ export const ResultsPage = () => {
   return (
     <Layout shadow={false}>
       <div className="card mb-3">
-        <Title text="Resultados" textClass="mt-5" />
+        <Title text={t('results.title')} textClass="mt-5" />
         {data ? (
           <>
             <ResultTable data={data} />
@@ -75,10 +78,10 @@ export const ResultsPage = () => {
                 }
                 className={`${DEFAULT_STYLE_BTN} h-11 my-6`}
               >
-                Descargar CSV
+                {t('results.download')}
               </CSVLink>
               <Button
-                text="Ver más"
+                text={t('results.show')}
                 type="button"
                 onClick={() => setShowModal(true)}
               />
@@ -89,7 +92,7 @@ export const ResultsPage = () => {
             />
           </>
         ) : (
-          <h1>No se encontró un ticket con el id {ticketId}</h1>
+          <h1>{t('results.not_found')} {ticketId}</h1>
         )}
       </div>
 

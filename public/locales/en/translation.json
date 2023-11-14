@@ -1,0 +1,92 @@
+{
+    "home": {
+        "welcome": "Welcome to Lecto!",
+        "login": "Log in",
+        "register": "Sign up",
+        "about": "About us",
+        "who": "Who",
+        "are_we": "are we?",
+        "tools": "Tools"
+    },
+    "login": {
+        "title": "Log in",
+        "user": "Username",
+        "password": "Password",
+        "forgot_password": "Forgot password?",
+        "no_account": "Don't have an account?",
+        "register": "Register",
+        "submit": "Log in"
+    },
+    "register": {
+        "title": "Register",
+        "have_account": "Already have an account?",
+        "login": "Log in",
+        "name": "Full name",
+        "email": "Email",
+        "user": "Username",
+        "password": "Password",
+        "submit": "Sign up"
+    },
+    "navbar": {
+        "pdf": "PDF",
+        "text": "Text",
+        "ticket": "View ticket",
+        "logout": "Log out"
+    },
+    "dashboard": {
+        "title": "Section for uploading PDF",
+        "file_label": "PDF:",
+        "validation": "Only .pdf files",
+        "from": "Start:",
+        "to": "End:",
+        "send": "Send"
+    },
+    "dashboard_table": {
+        "ticket": "Ticket",
+        "estimated_time": "Estimated time",
+        "date": "Date",
+        "time": "Time",
+        "file": "File",
+        "language": "Language",
+        "actions": "Actions",
+        "view": "View",
+        "delete": "Delete"
+    },
+    "text": {
+        "title": "Section for entering text",
+        "label": "Paste the text here",
+        "placeholder": "Your text",
+        "send": "Send"
+    },
+    "search": {
+        "alert": "Enter an ID to search",
+        "title": "Search ticket",
+        "label": "Ticket",
+        "placeholder": "Enter a ticket",
+        "submit": "Search"
+    },
+    "results": {
+        "title": "Results",
+        "download": "Download CSV",
+        "show": "Show more",
+        "not_found": "No ticket found with the id"
+    },
+    "result_table": {
+        "phrase": "Phrases",
+        "words": "Words",
+        "syllables": "Syllables",
+        "paragraphs": "Paragraphs",
+        "measure": "Measure",
+        "score": "Score",
+        "difficulty": "Difficulty",
+        "content": "Content"
+    },
+    "chart": {
+        "yLabel": "Perspicuity",
+        "xLabel": "Paragraph"
+    },
+    "languages": {
+        "spa": "Spanish",
+        "eng": "English"
+    }
+}

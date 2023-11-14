@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import { useTranslation } from 'react-i18next';
 // components
 import Input from "../components/auth/Input";
 import Button from "../components/auth/Button";
@@ -19,6 +19,8 @@ export const LoginPage = () => {
     password: "",
   });
 
+  const { t } = useTranslation();
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formData = new FormData();
@@ -37,30 +39,29 @@ export const LoginPage = () => {
   return (
     <Layout
       loginBackground={loginBackground}
-      title="Iniciar sesión"
+      title={t('login.title')}
       handleSubmit={handleSubmit}
-      footerLabel="¿No tienes una cuenta?"
-      footerLinkLabel="Registrarse"
+      footerLabel={t('login.no_account')}
+      footerLinkLabel={t('login.register')}
       footerHref="/register"
     >
       <Input
         name={"username"}
         value={formState.username}
         onChange={onInputChange}
-        label={"Usuario "}
+        label={t('login.user')}
       />
       <Input
         name={"password"}
         value={formState.password}
         onChange={onInputChange}
-        label={"Contraseña"}
+        label={t('login.password')}
         type="password"
       />
       <a href="#" className="text-xs text-purple-600 hover:underline">
-        Olvido su contraseña?
+        {t('login.forgot_password')}
       </a>
-      <Button label="Entrar" />
-      <div></div>
+      <Button label={t('login.submit')} />
     </Layout>
   );
 };

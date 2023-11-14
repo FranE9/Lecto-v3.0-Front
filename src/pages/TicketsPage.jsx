@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 // components
 import Button from "../components/home/Button";
 import Input from "../components/home/input/Input";
@@ -17,11 +18,13 @@ export const TicketsPage = () => {
   const { user } = useContext(AuthContext);
   const [ticketId, setTicketId] = useState("");
 
+  const { t } = useTranslation();
+
   const handleSubmit = async (event) => {
     setLoading(true);
     event.preventDefault();
     if (!ticketId) {
-      alert("Ingresa un id para buscar");
+      alert(t('search.alert'));
       return;
     }
 
@@ -39,16 +42,16 @@ export const TicketsPage = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} title="Consultar Ticket">
+    <Form onSubmit={handleSubmit} title={t('search.title')}>
       <Input
         name="ticketId"
-        labelText="Ticket"
-        placeholder="Ingresa un ticket"
+        labelText={t('search.label')}
+        placeholder={t('search.placeholder')}
         onChange={(e) => setTicketId(e.target.value)}
         value={ticketId}
         required
       />
-      <Button text="Consultar" loading={loading} />
+      <Button text={t('search.submit')} loading={loading} />
     </Form>
   );
 };

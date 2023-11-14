@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import Table from "./Table";
 import ResultRow from "./ResultRow";
 import {
@@ -22,6 +23,8 @@ const ResultTable = ({ data }) => {
     column4,
   } = data;
 
+  const { t } = useTranslation();
+
   const isSpa = language === "es";
 
   const labelSecondColumn = isSpa
@@ -38,7 +41,7 @@ const ResultTable = ({ data }) => {
 
   return (
     <>
-      <Table headers={["Frases", "Palabras", "Silabas", "Parrafos"]}>
+      <Table headers={[t('result_table.phrase'), t('result_table.words'), t('result_table.syllables'), t('result_table.paragraphs')]}>
         <ResultRow
           data={[
             { value: phrases },
@@ -50,7 +53,7 @@ const ResultTable = ({ data }) => {
         />
       </Table>
       <br />
-      <Table headers={["Medida", "Puntuación", "Dificultad", "Contenido"]}>
+      <Table headers={[t('result_table.measure'), t('result_table.score'), t('result_table.difficulty'), t('result_table.content')]}>
         <ResultRow
           data={[
             { value: labelSecondColumn, customClass: "font-medium" },
