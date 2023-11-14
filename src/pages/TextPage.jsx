@@ -19,7 +19,6 @@ export const TextPage = () => {
   const { user } = useContext(AuthContext);
   const { formState, onInputChange, onResetForm } = useForm({
     texto: "",
-    idioma: "spa",
   });
 
   const handleSubmit = async (event) => {
@@ -27,7 +26,6 @@ export const TextPage = () => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("Texto", formState.texto);
-    formData.append("Idioma", formState.idioma);
 
     const { isOk, data, message } = await sendText(formData, user.token);
     setLoading(false);
@@ -36,23 +34,13 @@ export const TextPage = () => {
       alert(message);
       return;
     }
-    const newTicket = formatTextData(data, formState.idioma);
+    const newTicket = formatTextData(data);
     saveTicket(newTicket);
     navigate(`/results/${data?.id}`);
   };
 
   return (
     <Form onSubmit={handleSubmit} title="Apartado para colocar texto">
-      <Select
-        labelText="Seleccionar idioma"
-        name="idioma"
-        onChange={onInputChange}
-        value={formState.idioma}
-        options={[
-          { name: "Español", value: "spa" },
-          { name: "Inglés", value: "eng" },
-        ]}
-      />
       <TextArea
         labelText="Pega el texto aquí"
         name="texto"

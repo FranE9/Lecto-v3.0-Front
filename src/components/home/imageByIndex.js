@@ -9,8 +9,8 @@ import smogImg from "../../assets/images/SMOG.jpg"
 export const spaImages = [pazosImg, infleszImg, fernandezHuertaImg, readabilityImg];
 export const engImages = [fleschImg, fogImg, smogImg];
 
-const imageByIndex = (index, language = "spa") => {
-    const images = language === "spa" ? spaImages : engImages;
+const imageByIndex = (index, language = "es") => {
+    const images = language === "es" ? spaImages : engImages;
     return images[index % images.length]
 }
 

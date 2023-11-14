@@ -9,7 +9,7 @@ const numberWithinRange = (number, min, max) =>
   Math.min(Math.max(number, min), max)
 
 const EmblaCarousel = (props) => {
-  const { slides, options, language = "spa" } = props
+  const { slides, options, language = "es" } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [tweenValues, setTweenValues] = useState([])
 

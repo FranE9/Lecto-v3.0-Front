@@ -22,7 +22,7 @@ const ResultTable = ({ data }) => {
     column4,
   } = data;
 
-  const isSpa = language === "spa";
+  const isSpa = language === "es";
 
   const labelSecondColumn = isSpa
     ? "Szigriszt-Pazos / INFLESZ"

@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Chart } from "react-charts";
 import { formatChartData } from "../../utils/formatData";
 
-const PerspicuityChart = ({ chartData = [], lang = "spa" }) => {
+const PerspicuityChart = ({ chartData = [], lang = "es" }) => {
   const data = formatChartData(chartData, lang);
 
   const primaryAxis = useMemo(

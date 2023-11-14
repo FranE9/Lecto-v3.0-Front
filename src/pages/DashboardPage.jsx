@@ -28,7 +28,7 @@ export const DashboardPage = () => {
       archivo_pdf: "",
       inicio: "",
       final: "",
-      idioma: "spa",
+      idioma: "es",
     });
 
   useEffect(() => {
@@ -142,8 +142,8 @@ export const DashboardPage = () => {
         onChange={onInputChange}
         value={formState.idioma}
         options={[
-          { name: "Español", value: "spa" },
-          { name: "Inglés", value: "eng" },
+          { name: "Español", value: "es" },
+          { name: "Inglés", value: "en" },
         ]}
       />
       <Button text="Enviar" loading={loading} />

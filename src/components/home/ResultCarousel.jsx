@@ -5,16 +5,16 @@ import EmblaCarousel from "./EmblaCarousel";
 
 const OPTIONS = { loop: true };
 
-const ResultCarousel = ({ language = "spa" }) => {
-  const SLIDES = language === "spa" ? 4 : 3;
+const ResultCarousel = ({ language = "es" }) => {
+  const SLIDES = language === "es" ? 4 : 3;
   return (
     <div className="container mx-auto px-12 rounded-lg pt-2 pb-6">
       <div className="card mb-3">
         <img
-          src={language == "spa" ? spaTitleImg : engTitleImg}
+          src={language == "es" ? spaTitleImg : engTitleImg}
           style={{ maxHeight: 125 }}
           className="rounded mx-auto d-block"
-          alt={`Escala en ${language === "spa" ? "espanol" : "inglés"}`}
+          alt={`Escala en ${language === "es" ? "espanol" : "inglés"}`}
         />
         <section className="sandbox__carousel">
           <EmblaCarousel

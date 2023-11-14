@@ -70,7 +70,7 @@ export const ResultsPage = () => {
                 data={data?.paragraphInfo || []}
                 headers={
                   getHeaders(
-                    data?.language === "spa" ? SPANISH_HEADERS : ENGLISH_HEADERS
+                    data?.language === "es" ? SPANISH_HEADERS : ENGLISH_HEADERS
                   ) || []
                 }
                 className={`${DEFAULT_STYLE_BTN} h-11 my-6`}
@@ -85,7 +85,7 @@ export const ResultsPage = () => {
             </div>
             <PerspicuityChart
               chartData={data?.paragraphInfo || []}
-              lang={data?.language || "spa"}
+              lang={data?.language || "es"}
             />
           </>
         ) : (
@@ -103,7 +103,7 @@ export const ResultsPage = () => {
               containerClassName="px-6"
             />
           </div>
-          <ResultCarousel language={data?.language || "spa"} />
+          <ResultCarousel language={data?.language || "es"} />
         </Modal>
       )}
     </Layout>

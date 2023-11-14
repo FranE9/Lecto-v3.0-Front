@@ -12,9 +12,9 @@ export const formatTicketData = (data) => {
   return newTicket;
 };
 
-export const formatTextData = (data, language) => {
-  const { Parrafo, ...ticket } = data || {};
-  const isSpa = language === "spa";
+export const formatTextData = (data) => {
+  const { Parrafo, language, ...ticket } = data || {};
+  const isSpa = language === "es";
   const newTicket = {
     ...ticket,
     paragraphs: Parrafo,
@@ -36,8 +36,8 @@ export const getCurrentTicket = (ticketId) => {
   return currentTicket?.id === ticketId ? currentTicket : null;
 };
 
-export const formatChartData = (paragraphInfo = [], lang = "spa") => {
-  const isSpa = lang === "spa";
+export const formatChartData = (paragraphInfo = [], lang = "es") => {
+  const isSpa = lang === "es";
   let chartData = {
     groupOne: [],
     groupTwo: [],

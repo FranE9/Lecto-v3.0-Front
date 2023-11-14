@@ -19,7 +19,7 @@ const TicketRow = ({ row, onDelete }) => {
       <Cell type="data">{formatDate(date)}</Cell>
       <Cell type="data">{formatTime(date)}</Cell>
       <Cell type="data">{row.file}</Cell>
-      <Cell type="data">{row.language === "spa" ? "Espanol" : "Inglés"}</Cell>
+      <Cell type="data">{row.language === "es" ? "Espanol" : "Inglés"}</Cell>
       <Cell useClassName={false}>
         <Link
           to={`/results/${row._id}`}
