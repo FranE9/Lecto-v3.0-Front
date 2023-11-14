@@ -28,7 +28,6 @@ export const DashboardPage = () => {
       archivo_pdf: "",
       inicio: "",
       final: "",
-      idioma: "es",
     });
 
   useEffect(() => {
@@ -89,7 +88,6 @@ export const DashboardPage = () => {
     formData.append("archivo_pdf", formState.archivo_pdf);
     formData.append("inicio", parseInt(formState.inicio));
     formData.append("final", parseInt(formState.final));
-    formData.append("idioma", formState.idioma);
     formData.append("user_id", user.userId);
 
     const { isOk, data, message } = await sendFile(formData, user.token);
@@ -136,16 +134,6 @@ export const DashboardPage = () => {
           onChange={onInputChange}
         />
       </div>
-      <Select
-        labelText="Seleccionar idioma"
-        name="idioma"
-        onChange={onInputChange}
-        value={formState.idioma}
-        options={[
-          { name: "Español", value: "es" },
-          { name: "Inglés", value: "en" },
-        ]}
-      />
       <Button text="Enviar" loading={loading} />
       <TicketTable handleDelete={handleDelete} tickets={tickets} />
     </Form>
