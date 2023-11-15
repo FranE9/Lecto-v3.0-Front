@@ -10,10 +10,8 @@ function App() {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    const lang = (navigator.language || navigator.userLanguage || "").split("-")[0]
-    i18n.changeLanguage(lang);
-  }, []);
-  
+    i18n.changeLanguage(user.lang);
+  }, [user.lang]);
 
   return (
     <BrowserRouter>

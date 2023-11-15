@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext();
@@ -8,12 +8,20 @@ const initialState = {
   token: "",
   username: '',
   userId: '',
+  lang: (navigator.language || navigator.userLanguage || "").split("-")[0]
 };
 
 export const AuthProvider = ({ children }) => {
   const storedState = JSON.parse(localStorage.getItem("lecto-user"));
+  const i18Lang = localStorage.getItem('i18nextLng');
 
-  const [user, setUser] = useState(storedState || initialState);
+  const [user, setUser] = useState(storedState || {...initialState, lang: i18Lang });
+
+  const changeLanguage = (lang) => {
+    const newUserInfo = { ...user, lang };
+    localStorage.setItem("lecto-user", JSON.stringify(newUserInfo));
+    setUser(newUserInfo);
+  }
 
   const updateUserInfo = (token) => {
     if (!token) {
@@ -28,7 +36,8 @@ export const AuthProvider = ({ children }) => {
       isLogged: Boolean(token),
       token,
       username: decoded?.username || "",
-      userId: decoded?.user_id || ""
+      userId: decoded?.user_id || "",
+      lang: user.lang,
     };
     localStorage.setItem("lecto-user", JSON.stringify(newUserInfo));
     setUser(newUserInfo);
@@ -39,6 +48,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         updateUserInfo,
+        changeLanguage
       }}
     >
       {children}
