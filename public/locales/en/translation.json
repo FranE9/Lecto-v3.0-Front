@@ -1,11 +1,23 @@
 {
     "home": {
         "welcome": "Welcome to Lecto!",
+        "desc": "What is Lecto? is a service to evaluate the readability and perspicuity of the texts for any document, and provides very helpful information to improve their understanding.",
         "login": "Log in",
         "register": "Sign up",
         "about": "About us",
         "who": "Who",
         "are_we": "are we?",
+        "desc_about": "We are graduates of the Central American University in the graduation process and as graduation work we have continued with this project since it comes from previous years, improving and recovering what was done in past works.",
+        "func": "Functionalities",
+        "func_desc": "Lecto has the following functionalities",
+        "func1": "Language detection",
+        "func1_desc": "The system detects the input language of each PDF/text file. The available languages ​​are: Spanish and English",
+        "func2": "PDF/Text File Processing",
+        "func2_desc": "The analysis process begins by converting each PDF page into a JPEG image, then binarizing with a grayscale filter and recognizing the text using the Tesseract OCR tool.",
+        "func3": "Ticket System",
+        "func3_desc": "After processing the text files, the results are displayed and stored so they can be consulted by the user.",
+        "func4": "Analysis of Results",
+        "func4_desc": "The system shows an analysis of difficulty and perspicuity score for each paragraph using the readability scales, as well as a graph that helps to better understand these results.",
         "tools": "Tools"
     },
     "login": {

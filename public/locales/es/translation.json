@@ -1,11 +1,23 @@
 {
     "home": {
         "welcome": "¡Bienvenido a Lecto!",
+        "desc": "¿Que es Lecto? es un servicio para evaluar la legibilidad y perspicuidad de los textos para cualquier documento, y provee información de gran ayuda para mejorar la comprensión de estos.",
         "login": "Inicia sesión",
         "register": "Registrate",
         "about": "Sobre nosotros",
         "who": "¿Quienes",
         "are_we": "somos?",
+        "desc_about": "Somos egresados de la Universidad Centroamericana en proceso de graduación y como trabajo de graduación hemos continuado con este proyecto ya que viene de años anteriores, mejorando y recuperando lo que en los trabajos pasados se hizo.",
+        "func": "Funcionalidades",
+        "func_desc": "Lecto cuenta con las siguientes funcionalidades",
+        "func1": "Detección de idioma",
+        "func1_desc": "El sistema detecta el idioma de entrada de cada archivo de PDF/texto. Los idiomas disponibles son: español e inglés",
+        "func2": "Procesamiento de archivos PDF/Texto",
+        "func2_desc": "El proceso de análisis comienza con la conversión de cada página de PDF en una imagen JPEG, para luego binarizar con un filtro de escala de grises y reconocer el texto mediante la herramienta Tesseract OCR.",
+        "func3": "Sistema de tickets",
+        "func3_desc": "Luego de procesar los archivos de texto, se muestran los resultados y se almacenan para poder ser consultados por el usuario.",
+        "func4": "Análisis de resultados",
+        "func4_desc": "El sistema muestra un analisis de dificultad y puntuación de perspicuidad por cada parrafo utilizando las escalas de legibilidad, también un gráfico que ayuda a entender mejor estos resultados.",
         "tools": "Herramientas"
     },
     "login": {
