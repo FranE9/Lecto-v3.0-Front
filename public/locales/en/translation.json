@@ -100,7 +100,8 @@
     },
     "chart": {
         "yLabel": "Perspicuity",
-        "xLabel": "Paragraph"
+        "xLabel": "Paragraph",
+        "title": "Paragraph"
     },
     "languages": {
         "spa": "Spanish",

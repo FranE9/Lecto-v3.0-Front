@@ -100,7 +100,8 @@
     },
     "chart": {
         "yLabel": "Perspicuidad",
-        "xLabel": "Número de parráfo"
+        "xLabel": "Número de parráfo",
+        "title": "Párrafo:"
     },
     "languages": {
         "spa": "Espanol",

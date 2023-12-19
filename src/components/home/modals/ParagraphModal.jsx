@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import Modal from "react-modal";
+import { useTranslation } from 'react-i18next';
 import Button from "../Button";
 
 const ParagraphModal = ({ data, visible, onHide }) => {
+
+  const { t } = useTranslation();
+
   useEffect(() => {
     Modal.setAppElement("#root");
   }, []);
@@ -28,7 +32,7 @@ const ParagraphModal = ({ data, visible, onHide }) => {
         />
       </div>
       <div className="p-6">
-        <h2 className="text-xl text-center font-semibold">Parrafo: </h2>
+        <h2 className="text-xl text-center font-semibold">{t('chart.title')} </h2>
         <p className="py-4">{data}</p>
       </div>
     </Modal>
