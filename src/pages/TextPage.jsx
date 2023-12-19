@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import Swal from 'sweetalert2'
 // components
 import Button from "../components/home/Button";
 import TextArea from "../components/home/input/TextArea";
@@ -12,6 +13,7 @@ import { AuthContext } from "../context/AuthContext";
 import { sendText } from "../api/lecto";
 // utils
 import { formatTextData, saveTicket } from "../utils/formatData";
+import { validateText } from "../utils/validation";
 
 export const TextPage = () => {
   const navigate = useNavigate();
@@ -24,8 +26,18 @@ export const TextPage = () => {
   const { t } = useTranslation();
 
   const handleSubmit = async (event) => {
-    setLoading(true);
     event.preventDefault();
+
+    if (!validateText(formState.texto)) {
+      return Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: t('text.error'),
+      })
+    }
+
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("Texto", formState.texto);
 
@@ -33,8 +45,11 @@ export const TextPage = () => {
     setLoading(false);
     if (!isOk) {
       onResetForm();
-      alert(message);
-      return;
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: message,
+      });
     }
     const newTicket = formatTextData(data);
     saveTicket(newTicket);

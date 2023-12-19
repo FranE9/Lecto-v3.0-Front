@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import Modal from "react-modal";
+import Swal from 'sweetalert2'
 import { CSVLink } from "react-csv";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import "../css/sandbox.css";
 import "../css/embla.css";
 // components
@@ -28,6 +28,7 @@ import {
   getHeaders,
 } from "../utils/constants";
 import PerspicuityChart from "../components/home/PerspicuityChart";
+import InfoModal from "../components/home/modals/InfoModal";
 
 export const ResultsPage = () => {
   const { ticketId } = useParams();
@@ -48,8 +49,11 @@ export const ResultsPage = () => {
           user.token
         );
         if (!isOk) {
-          alert(message);
-          return;
+          return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: message,
+          });
         }
         const formattedTicket = formatTicketData(data?.data);
         saveTicket(formattedTicket);
@@ -58,13 +62,12 @@ export const ResultsPage = () => {
     };
 
     if (ticketId) fetchData();
-    Modal.setAppElement("#root");
   }, []);
 
   return (
     <Layout shadow={false}>
       <div className="card mb-3">
-        <Title text={t('results.title')} textClass="mt-5" />
+        <Title text={t("results.title")} textClass="mt-5" />
         {data ? (
           <>
             <ResultTable data={data} />
@@ -78,10 +81,10 @@ export const ResultsPage = () => {
                 }
                 className={`${DEFAULT_STYLE_BTN} h-11 my-6`}
               >
-                {t('results.download')}
+                {t("results.download")}
               </CSVLink>
               <Button
-                text={t('results.show')}
+                text={t("results.show")}
                 type="button"
                 onClick={() => setShowModal(true)}
               />
@@ -92,22 +95,18 @@ export const ResultsPage = () => {
             />
           </>
         ) : (
-          <h1>{t('results.not_found')} {ticketId}</h1>
+          <h1>
+            {t("results.not_found")} {ticketId}
+          </h1>
         )}
       </div>
 
       {data && (
-        <Modal isOpen={showModal} onRequestClose={() => setShowModal(false)}>
-          <div className="flex flex-row-reverse">
-            <Button
-              text="X"
-              type="button"
-              onClick={() => setShowModal(false)}
-              containerClassName="px-6"
-            />
-          </div>
-          <ResultCarousel language={data?.language || "es"} />
-        </Modal>
+        <InfoModal
+          language={data?.language}
+          visible={showModal}
+          onHide={() => setShowModal(false)}
+        />
       )}
     </Layout>
   );

@@ -27,7 +27,8 @@
         "forgot_password": "Forgot password?",
         "no_account": "Don't have an account?",
         "register": "Register",
-        "submit": "Log in"
+        "submit": "Log in",
+        "error": "All fields are required"
     },
     "register": {
         "title": "Register",
@@ -37,7 +38,9 @@
         "email": "Email",
         "user": "Username",
         "password": "Password",
-        "submit": "Sign up"
+        "submit": "Sign up",
+        "error": "Check the fields and try again",
+        "placeholder": "Must be two characters or more"
     },
     "navbar": {
         "pdf": "PDF",
@@ -51,7 +54,8 @@
         "validation": "Only .pdf files",
         "from": "Start:",
         "to": "End:",
-        "send": "Send"
+        "send": "Send",
+        "error": "Check the fields and try again"
     },
     "dashboard_table": {
         "ticket": "Ticket",
@@ -68,7 +72,8 @@
         "title": "Section for entering text",
         "label": "Paste the text here",
         "placeholder": "Your text",
-        "send": "Send"
+        "send": "Send",
+        "error": "Enter text to analyze"
     },
     "search": {
         "alert": "Enter an ID to search",

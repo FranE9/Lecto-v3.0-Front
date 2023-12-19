@@ -27,7 +27,8 @@
         "forgot_password": "Olvidó su contraseña?",
         "no_account": "¿No tienes una cuenta?",
         "register": "Registrarse",
-        "submit": "Entrar"
+        "submit": "Entrar",
+        "error": "Todos los campos son obligatorios"
     },
     "register": {
         "title": "Registrarse",
@@ -37,7 +38,9 @@
         "email": "Correo electrónico",
         "user": "Usuario",
         "password": "Contraseña",
-        "submit": "Registrar"
+        "submit": "Registrar",
+        "error": "Revisa los campos e intentálo de nuevo",
+        "placeholder": "Debe de tener 2 caracteres o más"
     },
     "navbar": {
         "pdf": "PDF",
@@ -51,7 +54,8 @@
         "validation": "Solo archivos .pdf",
         "from": "Inicio:",
         "to": "Fin:",
-        "send": "Enviar"
+        "send": "Enviar",
+        "error": "Revisa los campos e intentálo de nuevo"
     },
     "dashboard_table": {
         "ticket": "Ticket",
@@ -68,7 +72,8 @@
         "title": "Apartado para colocar texto",
         "label": "Pega el texto aquí",
         "placeholder": "Ingresa el texto",
-        "send": "Enviar"
+        "send": "Enviar",
+        "error": "Ingresa un texto para analizar"
     },
     "search": {
         "alert": "Ingresa un id para buscar",

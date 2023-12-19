@@ -113,3 +113,9 @@ export async function getBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
+export function getParagraph(index) {
+  const currentTicket = JSON.parse(localStorage.getItem("current-ticket"));
+
+  return currentTicket?.paragraphInfo?.[index]?.content;
+}

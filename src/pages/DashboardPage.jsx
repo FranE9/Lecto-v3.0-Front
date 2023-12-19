@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PDFDocument } from "pdf-lib";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
 // components
 import Button from "../components/home/Button";
 import Input from "../components/home/input/Input";
@@ -17,6 +18,7 @@ import { deleteTicketById, getTicketsByUser } from "../api/ticket";
 // utils
 import { formatTicketData, saveTicket } from "../utils/formatData";
 import { getBase64 } from "../utils/functions";
+import { validatePdfForm } from "../utils/validation";
 
 export const DashboardPage = () => {
   const navigate = useNavigate();
@@ -32,7 +34,6 @@ export const DashboardPage = () => {
 
   const { t } = useTranslation();
 
-
   useEffect(() => {
     fetchTickets();
   }, []);
@@ -40,7 +41,6 @@ export const DashboardPage = () => {
   useEffect(() => {
     if (formState.archivo_pdf !== "") {
       onFileLoad();
-      // console.log(formState.archivo_pdf)
     }
   }, [formState.archivo_pdf]);
 
@@ -54,7 +54,11 @@ export const DashboardPage = () => {
         final: pages.length.toString(),
       });
     } catch (error) {
-      console.log("Error loading PDF document: ", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+      });
       onUpdateState({
         inicio: "",
         final: "",
@@ -68,8 +72,11 @@ export const DashboardPage = () => {
       user.token
     );
     if (!isOk) {
-      alert(message);
-      return;
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: message,
+      });
     }
     setTickets(data?.data || []);
   };
@@ -77,16 +84,28 @@ export const DashboardPage = () => {
   const handleDelete = async (ticketId) => {
     const { isOk, message } = await deleteTicketById(ticketId, user.token);
     if (!isOk) {
-      alert(message);
-      return;
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: message,
+      });
     }
-    alert(message);
+    Swal.fire(message, "", "success");
     fetchTickets();
   };
 
   const handleSubmit = async (event) => {
-    setLoading(true);
     event.preventDefault();
+    if (!validatePdfForm(formState)) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: t("dashboard.error"),
+      });
+    }
+
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("archivo_pdf", formState.archivo_pdf);
     formData.append("inicio", parseInt(formState.inicio));
@@ -95,10 +114,14 @@ export const DashboardPage = () => {
 
     const { isOk, data, message } = await sendFile(formData, user.token);
     setLoading(false);
+    
     if (!isOk) {
       onResetForm();
-      alert(message);
-      return;
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: message,
+      });
     }
     const newTicket = formatTicketData(data?.data);
     saveTicket(newTicket);
@@ -107,19 +130,21 @@ export const DashboardPage = () => {
   };
 
   return (
-    <Form title={t('dashboard.title')} onSubmit={handleSubmit}>
+    <Form title={t("dashboard.title")} onSubmit={handleSubmit}>
       <div></div>
       <InputFile
-        labelText={t('dashboard.file_label')}
+        labelText={t("dashboard.file_label")}
         name="archivo_pdf"
         accept=".pdf"
         type="file"
         onChange={onFileChange}
       />
-      <p className="mb-4 text-base text-neutral-600 ">{t('dashboard.validation')}</p>
+      <p className="mb-4 text-base text-neutral-600 ">
+        {t("dashboard.validation")}
+      </p>
       <div className="grid gap-6 mb-6 md:grid-cols-2">
         <Input
-          labelText={t('dashboard.from')}
+          labelText={t("dashboard.from")}
           type="number"
           name="inicio"
           placeholder="1"
@@ -128,7 +153,7 @@ export const DashboardPage = () => {
           onChange={onInputChange}
         />
         <Input
-          labelText={t('dashboard.to')}
+          labelText={t("dashboard.to")}
           type="number"
           name="final"
           placeholder="5"
@@ -137,7 +162,7 @@ export const DashboardPage = () => {
           onChange={onInputChange}
         />
       </div>
-      <Button text={t('dashboard.send')} loading={loading} />
+      <Button text={t("dashboard.send")} loading={loading} />
       <TicketTable handleDelete={handleDelete} tickets={tickets} />
     </Form>
   );

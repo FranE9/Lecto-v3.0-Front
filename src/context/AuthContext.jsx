@@ -25,8 +25,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserInfo = (token) => {
     if (!token) {
-      localStorage.removeItem("lecto-user");
-      setUser(initialState);
+      setUser({ ...initialState, lang: user.lang });
       return;
     }
 

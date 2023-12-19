@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useTranslation } from 'react-i18next';
+import Swal from 'sweetalert2'
 // components
 import Input from "../components/auth/Input";
 import Button from "../components/auth/Button";
@@ -11,6 +12,7 @@ import { useForm } from "../hook/useForm";
 import loginBackground from "../../src/assets/images/backgroundLogin.png";
 // api
 import { login } from "../api/auth";
+import { validateLogin } from "../utils/validation";
 
 export const LoginPage = () => {
   const { updateUserInfo } = useContext(AuthContext);
@@ -23,6 +25,15 @@ export const LoginPage = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+
+    if (!validateLogin(formState)) {
+      return Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: t('login.error'),
+      })
+    }
+
     const formData = new FormData();
     formData.append("username", formState.username);
     formData.append("password", formState.password);
@@ -30,8 +41,11 @@ export const LoginPage = () => {
     const { isOk, data, message } = await login(formData);
     if (!isOk) {
       onResetForm();
-      alert(message);
-      return;
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: message,
+      });
     }
     updateUserInfo(data.access_token);
   };

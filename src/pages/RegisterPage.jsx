@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useTranslation } from 'react-i18next';
+import Swal from 'sweetalert2'
 // components
 import Input from "../components/auth/Input";
 import Button from "../components/auth/Button";
@@ -11,6 +12,7 @@ import { AuthContext } from "../context/AuthContext";
 import loginBackground from "../../src/assets/images/backgroundLogin.png";
 // api
 import { register } from "../api/auth";
+import { validateRegister } from "../utils/validation";
 
 export const RegisterPage = () => {
   const { updateUserInfo } = useContext(AuthContext);
@@ -25,12 +27,24 @@ export const RegisterPage = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+
+    if (!validateRegister(formState)) {
+      return Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: t('register.error'),
+      })
+    }
+
     const { isOk, data, message } = await register(formState);
 
     if (!isOk) {
       onResetForm();
-      alert(message);
-      return;
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: message,
+      });
     }
     updateUserInfo(data.access_token);
   };
@@ -48,6 +62,7 @@ export const RegisterPage = () => {
         value={formState.name}
         onChange={onInputChange}
         label={t('register.name')}
+        
       />
       <Input
         name={"email"}
@@ -61,12 +76,14 @@ export const RegisterPage = () => {
         value={formState.username}
         onChange={onInputChange}
         label={t('register.user')}
+        placeholder={t('register.placeholder')}
       />
       <Input
         name={"password"}
         value={formState.password}
         onChange={onInputChange}
         label={t('register.password')}
+        placeholder={t('register.placeholder')}
         type="password"
       />
       <Button label={t('register.submit')} />
