@@ -86,7 +86,9 @@
         "title": "Resultados",
         "download": "Descargar CSV",
         "show": "Ver más",
-        "not_found": "No se encontró el ticket con el id"
+        "not_found": "No se encontró el ticket con el id",
+        "inProgress": "El ticket sigue en proceso. Regresa más tarde.",
+        "goBack": "Regresar"
     },
     "result_table": {
         "phrase": "Frases",

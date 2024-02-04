@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { CSVLink } from "react-csv";
 import { useTranslation } from "react-i18next";
 import "../css/sandbox.css";
@@ -9,7 +9,6 @@ import "../css/embla.css";
 import Title from "../components/home/Title";
 import Layout from "../components/home/Layout";
 import ResultTable from "../components/home/table/ResultTable";
-import ResultCarousel from "../components/home/ResultCarousel";
 import Button from "../components/home/Button";
 // hooks
 import { AuthContext } from "../context/AuthContext";
@@ -30,6 +29,7 @@ import {
 } from "../utils/constants";
 import PerspicuityChart from "../components/home/PerspicuityChart";
 import InfoModal from "../components/home/modals/InfoModal";
+import NoTicket from "../components/home/NoTicket";
 
 export const ResultsPage = () => {
   const { ticketId } = useParams();
@@ -69,7 +69,9 @@ export const ResultsPage = () => {
     <Layout shadow={false}>
       <div className="card mb-3">
         <Title text={t("results.title")} textClass="mt-5" />
-        {data ? (
+        {data && data.pending ? (
+          <NoTicket text={t("results.inProgress")} />
+        ) : data && !data.pending ? (
           <>
             <ResultTable data={data} />
             <div className="flex justify-between">
@@ -96,9 +98,7 @@ export const ResultsPage = () => {
             />
           </>
         ) : (
-          <h1>
-            {t("results.not_found")} {ticketId}
-          </h1>
+          <NoTicket text={`${t("results.inProgress")} ${ticketId}`} />
         )}
       </div>
 

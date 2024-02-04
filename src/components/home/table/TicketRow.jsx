@@ -13,8 +13,11 @@ import Cell from "./Cell";
 const TicketRow = ({ row, onDelete }) => {
   const [date] = useState(new Date(row.date));
   const { t, i18n } = useTranslation();
+
+  const bgPending = row.pending ? { backgroundColor: "#fef9c3" } : {}
+
   return (
-    <tr className="bg-white border-b">
+    <tr className={"bg-white border-b"} style={{...bgPending}}>
       <Cell type="data">{row._id}</Cell>
       <Cell type="data">{getEstimatedTime(row?.duration || 0, i18n.language)}</Cell>
       <Cell type="data">{formatDate(date, i18n.language)}</Cell>

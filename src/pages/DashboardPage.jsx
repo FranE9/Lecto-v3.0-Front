@@ -127,6 +127,7 @@ export const DashboardPage = () => {
     saveTicket(newTicket);
 
     navigate(`/results/${newTicket.id}`);
+    
   };
 
   return (

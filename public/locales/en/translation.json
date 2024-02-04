@@ -86,7 +86,9 @@
         "title": "Results",
         "download": "Download CSV",
         "show": "Show more",
-        "not_found": "No ticket found with the id"
+        "not_found": "No ticket found with the id",
+        "inProgress": "Ticket is still in progress. Come back later.",
+        "goBack": "Go back"
     },
     "result_table": {
         "phrase": "Phrases",
