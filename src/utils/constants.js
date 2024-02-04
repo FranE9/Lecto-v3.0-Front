@@ -1,5 +1,6 @@
 export const getHeaders = (languageHeaders = {}) => [
-  { label: "Parrafo", key: "Parrafo" },
+  { label: "No Parrafo", key: "Parrafo" },
+  { label: "Parrafo", key: "content" },
   { label: "Letras", key: "letters" },
   { label: "Palabras", key: "words" },
   { label: "Silabas", key: "syllables" },

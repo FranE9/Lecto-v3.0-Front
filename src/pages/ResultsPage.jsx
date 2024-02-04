@@ -17,6 +17,7 @@ import { AuthContext } from "../context/AuthContext";
 import { getTicketById } from "../api/ticket";
 // utils
 import {
+  formatCsvData,
   formatTicketData,
   getCurrentTicket,
   saveTicket,
@@ -73,7 +74,7 @@ export const ResultsPage = () => {
             <ResultTable data={data} />
             <div className="flex justify-between">
               <CSVLink
-                data={data?.paragraphInfo || []}
+                data={formatCsvData(data?.paragraphInfo || [])}
                 headers={
                   getHeaders(
                     data?.language === "es" ? SPANISH_HEADERS : ENGLISH_HEADERS

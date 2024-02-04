@@ -83,6 +83,8 @@ export const formatChartData = (paragraphInfo = [], lang = "es") => {
   ];
 };
 
+
+export const formatCsvData = (paragraphs = []) => paragraphs.map(paragraph => ({ ...paragraph, content: paragraph.content.replace(/"/g, '""')}))
 /*
 {
       "Parrafo": "0",
