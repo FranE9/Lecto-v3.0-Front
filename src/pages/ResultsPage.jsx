@@ -41,29 +41,34 @@ export const ResultsPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const foundTicket = getCurrentTicket(ticketId);
-      if (foundTicket) {
-        setData(foundTicket);
-      } else {
-        const { isOk, data, message } = await getTicketById(
-          ticketId,
-          user.token
-        );
-        if (!isOk) {
-          return Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: message,
-          });
-        }
-        const formattedTicket = formatTicketData(data?.data);
-        saveTicket(formattedTicket);
-        setData(formattedTicket);
+      const { isOk, data, message } = await getTicketById(
+        ticketId,
+        user.token
+      );
+      if (!isOk) {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: message,
+        });
       }
+      const formattedTicket = formatTicketData(data?.data);
+      saveTicket(formattedTicket);
+      setData(formattedTicket);
     };
 
     if (ticketId) fetchData();
   }, []);
+
+  useEffect(() => {
+    if (ticketId) {
+      const foundTicket = getCurrentTicket(ticketId);
+      if (foundTicket) {
+        setData(foundTicket);
+      }
+    }
+  }, [ticketId])
+  
 
   return (
     <Layout shadow={false}>

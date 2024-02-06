@@ -1,13 +1,13 @@
 {
     "home": {
         "welcome": "¡Bienvenido a Lecto!",
-        "desc": "¿Que es Lecto? es un servicio para evaluar la legibilidad y perspicuidad de los textos para cualquier documento, y provee información de gran ayuda para mejorar la comprensión de estos.",
+        "desc": "¿Qué es Lecto? es un servicio para evaluar la legibilidad y perspicuidad de los textos para cualquier documento, y provee información de gran ayuda para mejorar la comprensión de estos.",
         "login": "Inicia sesión",
         "register": "Registrate",
         "about": "Sobre nosotros",
-        "who": "¿Quienes",
+        "who": "¿Quiénes",
         "are_we": "somos?",
-        "desc_about": "Somos egresados de la Universidad Centroamericana en proceso de graduación y como trabajo de graduación hemos continuado con este proyecto ya que viene de años anteriores, mejorando y recuperando lo que en los trabajos pasados se hizo.",
+        "desc_about": "Somos egresados de la Universidad Centroamericana y como trabajo de graduación hemos continuado con este proyecto ya que viene de años anteriores, mejorando y recuperando lo que en los trabajos pasados se hizo.",
         "func": "Funcionalidades",
         "func_desc": "Lecto cuenta con las siguientes funcionalidades",
         "func1": "Detección de idioma",
